@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
+const routes = require('./routes')
 require('dotenv').config();
 const port = process.env.PORT;
 
@@ -17,6 +18,7 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { fl
 console.log(__dirname);
 // create logger
 app.use(morgan("combined",{ stream: accessLogStream }));
+app.use(routes)
 
 app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
